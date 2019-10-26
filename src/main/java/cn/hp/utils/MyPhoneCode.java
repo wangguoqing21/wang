@@ -9,9 +9,9 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-
+//jj
 public class MyPhoneCode {
-	
+	//123456789
 	public static int getCode(String phone) {
 		//设置超时时间-可自行调整
 		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
