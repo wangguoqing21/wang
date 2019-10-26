@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+		<!-- 开启注释 -->
+		<context:annotation-config></context:annotation-config>
+		<!-- 开启控制层扫描 -->
+		<context:component-scan base-package="com.hp"></context:component-scan>
+		<!-- 加载jdbc文件 -->
+		<bean id="jdbcConfiguration" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  		  <property name="location" value="classpath:jdbc.properties"/>
+		</bean>
+		
+		<!-- 配置数据源 -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    	<property name="driverClassName" value="${jdbc.driverClassName}" />
+   	 	<property name="url" value="${jdbc.url}" />
+   	 	<property name="username" value="${jdbc.username}" />
+    	<property name="password" value="${jdbc.password}" />
+		</bean>
+		
+		<!-- 配置seef-->
+		 <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+   
+        <property name="hibernateProperties">
+           <props>
+           <prop key="hibernate.show_sql">true</prop>
+           <prop key="hibernate.format_sql">true</prop>
+           <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+           </props>
+        </property>
+        <property name="packagesToScan" value="com.hp.entity"></property>
+    </bean>
+    <!-- 配置hiber -->
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!-- 配置事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+	</bean>
+		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+			<constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
+		</bean>
+	<!-- 事务注释扫面-->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

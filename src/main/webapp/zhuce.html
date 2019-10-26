@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- 重置文件 -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style3.css">
+  <title>注册</title>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript">
+  function Mycode(){
+		var phone=$("#inp1").val();
+		$.ajax({
+			url:"codePhone",
+			data:{"pe":phone},
+			dataType:"text",
+			error:function(){
+				alert("错误");
+			},
+			success:function(data){
+			},
+			type:"POST"
+		});
+	}
+	</script>
+</head>
+<body>
+ <form action="findBook" method="post">
+ <div class="reg_div" style="height: 650px;">
+    <p>注册</p>
+    <ul class="reg_ul">
+      <li>
+          <span>用户名：</span>
+          <input type="text" name="userName" value="" placeholder="4-8位用户名" class="reg_user">
+          <span class="tip user_hint"></span>
+      </li>
+          <li><span>性别：</span></li>
+         <div style="margin-top: -20px;">
+         <input type="radio" name="sex" value="男" placeholder="输入性别">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <input type="radio" name="sex" value="女" placeholder="输入性别">女
+         </div>
+     
+      <li>
+          <span>密码：</span>
+          <input type="password" name="passWord" value="" placeholder="6-16位密码" class="reg_password">
+          <span class="tip password_hint"></span>
+      </li>
+      <li>
+          <span>确认密码：</span>
+          <input type="password" name="passWord" value="" placeholder="确认密码" class="reg_confirm">
+          <span class="tip confirm_hint"></span>
+      </li>
+      <li>
+          <span>邮箱：</span>
+          <input type="text" name="email" value="" placeholder="邮箱" class="reg_email">
+          <span class="tip email_hint"></span>
+      </li>
+      <li><span>身份证类型：</span></li><!--0：二代身份证  1：护照 2港澳通行证 3：台湾通行证-->
+      <div style="margin-top: -20px;">
+      	<input type="radio" name="cardType" value="二代身份证" placeholder="输入身份证类型">二代身份证&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      	<input type="radio" name="cardType" value="护照" placeholder="输入身份证类型">护照
+      </div><br />
+      <div>
+      	<input type="radio" name="cardType" value="港澳通行证" placeholder="输入身份证类型">港澳通行证
+      	<input type="radio" name="cardType" value="台湾通行证" placeholder="输入身份证类型">台湾通行证
+      </div>
+       <li>
+          <span>身份证号：</span>
+          <input type="text" name="idCard" value="" placeholder="6-18位身份证" class="reg_isCard">
+          <span class="tip password_hint"></span>
+      </li>
+  
+       <li>
+          	<span>手机号码：</span>
+          	<input type="text" id="inp1" placeholder="手机号" class="input-item yanzheng" value="17839040083"><br>
+          	<div style="margin-left: 140px; margin-top: 10px;">
+          </div>
+          <!--<div><button type="button" name="button">获取验证码</button></div>-->
+       </li>
+        <li>
+          	<span>验证码：</span>
+          	<input type="text" placeholder="验证码" class="input-item yanzheng"><br>
+          	<div style="margin-left: 140px; margin-top: 40px;">
+          	<input type="button" class="yanzhengma" value="获取验证码" onclick="Mycode()">
+          </div>
+          <!--<div><button type="button" name="button">获取验证码</button></div>-->
+       </li>
+      <li>
+      <div style="margin-left: 140px; margin-top: 10px;">
+        <input type="submit" class="red_button" value="注册">
+        </div>
+      </li>
+    </ul>
+  </div>
+ </form>
+  
+  
+
+</body>
+</html>
